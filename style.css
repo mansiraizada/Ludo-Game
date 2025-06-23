@@ -1,4 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
+
+:root {
+    --primary-color: #753682;
+    --secondary-color: #bf2e34;
+    --accent-color: #c7365f;
+    --text-dark: #333;
+    --text-light: #ddd;
+    --white: #fff;
+    --glass-bg: rgba(255, 255, 255, 0.35);
+    --glass-active: rgba(255, 255, 255, 0.4);
+    --glass-button: rgba(255, 255, 255, 0.6);
+    --shadow-light: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 2rem 5rem rgba(0, 0, 0, 0.2);
+    --shadow-heavy: 0 3rem 5rem rgba(0, 0, 0, 0.25);
+    --border-radius: 9px;
+    --transition: all 0.75s ease;
+}
 
 * {
     margin: 0;
@@ -7,65 +24,69 @@
 }
 
 html {
-    font-size: 62.5%;
+    font-size: clamp(50%, 1vw + 0.5rem, 62.5%);
 }
 
 body {
     font-family: 'Nunito', sans-serif;
     font-weight: 400;
-    height: 100vh;
-    color: #333;
-    background-image: linear-gradient(to top left, #753682 0%, #bf2e34 100%);
+    min-height: 100vh;
+    color: var(--text-dark);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    overflow: hidden;
+    padding: clamp(0.5rem, 2vw, 2rem);
+    overflow-x: hidden;
 }
 
 main {
-   position: relative;
-   width: 100%;
-   max-width: 100rem;
-   height: 60rem;
-   background-color: rgba(255, 255, 255, 0.35);
-   backdrop-filter: blur(200px);
-   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.25);
-   border-radius: 9px;
-   overflow: hidden;
-   display: flex;
+    position: relative;
+    width: 100%;
+    max-width: min(100rem, 95vw);
+    height: clamp(50rem, 80vh, 60rem);
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(200px);
+    box-shadow: var(--shadow-heavy);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
 }
 
 .player {
-    flex: 50%;
-    padding: 4rem 2rem;
+    flex: 1;
+    padding: clamp(1rem, 4vw, 4rem) clamp(0.5rem, 2vw, 2rem);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    transition: all 0.75s;
+    transition: var(--transition);
+    min-height: 0;
 }
 
 .name {
     position: relative;
-    font-size: 3rem;
+    font-size: clamp(1.8rem, 4vw, 3rem);
     text-transform: uppercase;
     letter-spacing: 1px;
     word-spacing: 2px;
     font-weight: 300;
-    margin-bottom: 1rem;
+    margin-bottom: clamp(0.5rem, 2vw, 1rem);
     text-align: center;
+    line-height: 1.2;
 }
 
 .score {
-    font-size: 6rem;
+    font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 300;
-    color: #c7365f;
+    color: var(--accent-color);
     margin-bottom: auto;
+    text-align: center;
 }
 
 .player--active {
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: var(--glass-active);
 }
 
 .player--active .name {
@@ -81,25 +102,26 @@ main {
 }
 
 .current {
-    background-color: #c7365f;
+    background-color: var(--accent-color);
     opacity: 0.8;
-    border-radius: 9px;
-    color: #fff;
-    width: 80%;
-    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    color: var(--white);
+    width: min(80%, 20rem);
+    padding: clamp(1rem, 3vw, 1.5rem);
     text-align: center;
-    transition: all 0.75s;
+    transition: var(--transition);
 }
 
 .current-label {
     text-transform: uppercase;
-    margin-bottom: 1rem;
-    font-size: 1.4rem;
-    color: #ddd;
+    margin-bottom: clamp(0.5rem, 2vw, 1rem);
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: var(--text-light);
 }
 
 .current-score {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 400;
 }
 
 .btn {
@@ -110,35 +132,40 @@ main {
     background: none;
     border: none;
     font-family: inherit;
-    font-size: 1.6rem;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
     text-transform: uppercase;
     cursor: pointer;
     font-weight: 400;
-    transition: all 0.2s;
-    background-color: rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease;
+    background-color: var(--glass-button);
     backdrop-filter: blur(10px);
-    padding: 0.7rem 2rem;
+    padding: clamp(0.5rem, 1.5vw, 0.7rem) clamp(1.2rem, 3vw, 2rem);
     border-radius: 50rem;
-    box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-light);
     z-index: 10;
+    white-space: nowrap;
+    min-height: 44px; /* Minimum touch target size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn::first-letter {
-    font-size: 2rem;
+    font-size: 1.2em;
     display: inline-block;
     margin-right: 0.7rem;
 }
 
 .btn--new {
-    top: 4rem;
+    top: clamp(2rem, 5vh, 4rem);
 }
 
 .btn--roll {
-    top: 39.3rem;
+    top: clamp(32rem, 65%, 39.3rem);
 }
 
 .btn--hold {
-    top: 46.1rem;
+    top: clamp(36rem, 75%, 46.1rem);
 }
 
 .btn:active {
@@ -147,17 +174,24 @@ main {
 }
 
 .btn:focus {
-    outline: none;
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.btn:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: translateX(-50%) translateY(-2px);
 }
 
 .dice {
     position: absolute;
     left: 50%;
-    top: 16.5rem;
+    top: clamp(12rem, 25%, 16.5rem);
     transform: translateX(-50%);
-    height: 8rem;
+    height: clamp(5rem, 10vw, 8rem);
     border-radius: 2.5px;
-    box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-medium);
+    max-width: 90%;
 }
 
 .player--winner {
@@ -166,83 +200,126 @@ main {
 
 .player--winner .name {
     font-weight: 700;
-    color: #c7365f;
+    color: var(--accent-color);
 }
 
 .hidden {
     display: none;
 }
 
-/* Mobile Responsive Styles */
-@media (max-width: 768px) {
-    html {
-        font-size: 50%;
+/* Tablet Portrait */
+@media (max-width: 1024px) and (orientation: portrait) {
+    main {
+        flex-direction: column;
+        height: clamp(60rem, 90vh, 70rem);
     }
     
+    .player {
+        flex: 1;
+        min-height: 35vh;
+        max-height: 45vh;
+    }
+    
+    .btn--new {
+        top: 2rem;
+        right: 2rem;
+        left: auto;
+        transform: none;
+    }
+    
+    .btn--roll {
+        bottom: 8rem;
+        top: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .btn--hold {
+        bottom: 2rem;
+        top: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .dice {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 50;
+    }
+}
+
+/* Mobile Landscape */
+@media (max-width: 926px) and (orientation: landscape) {
     body {
-        padding: 0.5rem;
-        height: 80vh;
+        padding: clamp(0.5rem, 1vw, 1rem);
+    }
+    
+    main {
+        height: 90vh;
+        flex-direction: row;
+    }
+    
+    .player {
+        padding: clamp(1rem, 2vw, 2rem) clamp(0.5rem, 1vw, 1rem);
+    }
+    
+    .btn {
+        font-size: clamp(1rem, 2vw, 1.4rem);
+        padding: clamp(0.4rem, 1vw, 0.6rem) clamp(1rem, 2vw, 1.5rem);
+    }
+}
+
+/* Mobile Portrait */
+@media (max-width: 768px) and (orientation: portrait) {
+    body {
+        padding: clamp(0.3rem, 1vw, 0.5rem);
+        height: 100vh;
         overflow: hidden;
     }
     
     main {
         height: 100vh;
         flex-direction: column;
+        max-width: 100vw;
     }
     
     .player {
         flex: 1;
-        padding: 1.5rem 1rem;
-        min-height: 40vh;
+        padding: clamp(1rem, 3vw, 1.5rem) clamp(0.8rem, 2vw, 1rem);
+        min-height: 35vh;
         max-height: 45vh;
     }
     
-    .name {
-        font-size: 2.2rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .score {
-        font-size: 4rem;
-        margin-bottom: 1rem;
-    }
-    
     .current {
-        width: 70%;
-        padding: 0.8rem;
-    }
-    
-    .current-label {
-        font-size: 1.1rem;
-    }
-    
-    .current-score {
-        font-size: 1.8rem;
+        width: min(85%, 25rem);
+        padding: clamp(0.6rem, 2vw, 0.8rem);
     }
     
     .btn {
-        font-size: 1.3rem;
-        padding: 0.5rem 1.2rem;
         position: fixed;
         z-index: 100;
+        font-size: clamp(1.1rem, 3vw, 1.3rem);
+        padding: clamp(0.4rem, 1.5vw, 0.5rem) clamp(1rem, 3vw, 1.2rem);
     }
     
     .btn--new {
-        top: 1rem;
-        right: 1rem;
+        top: clamp(0.5rem, 2vw, 1rem);
+        right: clamp(0.5rem, 2vw, 1rem);
         left: auto;
         transform: none;
     }
     
     .btn--roll {
-        bottom: 6rem;
+        bottom: clamp(5rem, 12vh, 7rem);
         left: 50%;
         top: auto;
         transform: translateX(-50%);
     }
     
     .btn--hold {
-        bottom: 1rem;
+        bottom: clamp(0.5rem, 2vh, 1rem);
         left: 50%;
         top: auto;
         transform: translateX(-50%);
@@ -253,137 +330,137 @@ main {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        height: 5rem;
+        height: clamp(4rem, 8vw, 5rem);
         z-index: 50;
     }
 }
 
+/* Small Mobile */
 @media (max-width: 480px) {
-    html {
-        font-size: 42%;
-    }
-    
-    body {
-        padding: 0.3rem;
-    }
-    
     .player {
-        padding: 1rem 0.8rem;
+        padding: clamp(0.8rem, 2vw, 1rem) clamp(0.5rem, 1.5vw, 0.8rem);
         max-height: 42vh;
     }
     
-    .name {
-        font-size: 1.8rem;
-        margin-bottom: 0.3rem;
-    }
-    
-    .score {
-        font-size: 3.5rem;
-        margin-bottom: 0.8rem;
-    }
-    
     .current {
-        width: 75%;
-        padding: 0.6rem;
-    }
-    
-    .current-label {
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .current-score {
-        font-size: 1.6rem;
+        width: min(90%, 20rem);
+        padding: clamp(0.5rem, 1.5vw, 0.6rem);
     }
     
     .btn {
-        font-size: 1.1rem;
-        padding: 0.4rem 1rem;
+        font-size: clamp(1rem, 2.5vw, 1.1rem);
+        padding: clamp(0.3rem, 1vw, 0.4rem) clamp(0.8rem, 2vw, 1rem);
+        min-height: 40px;
     }
     
     .btn::first-letter {
-        font-size: 1.4rem;
-    }
-    
-    .btn--new {
-        top: 0.5rem;
-        right: 0.5rem;
+        font-size: 1.1em;
+        margin-right: 0.5rem;
     }
     
     .btn--roll {
-        bottom: 5rem;
-    }
-    
-    .btn--hold {
-        bottom: 0.5rem;
+        bottom: clamp(4rem, 10vh, 5rem);
     }
     
     .dice {
-        height: 4rem;
+        height: clamp(3.5rem, 7vw, 4rem);
     }
 }
 
-@media (max-width: 320px) {
-    html {
-        font-size: 38%;
-    }
-    
-    body {
-        padding: 0.2rem;
-    }
-    
+/* Extra Small Mobile */
+@media (max-width: 360px) {
     .player {
-        padding: 0.8rem 0.5rem;
+        padding: clamp(0.5rem, 1.5vw, 0.8rem) clamp(0.3rem, 1vw, 0.5rem);
         max-height: 40vh;
     }
     
-    .name {
-        font-size: 1.6rem;
-        margin-bottom: 0.2rem;
-    }
-    
-    .score {
-        font-size: 3rem;
-        margin-bottom: 0.5rem;
-    }
-    
     .current {
-        width: 80%;
-        padding: 0.5rem;
-    }
-    
-    .current-label {
-        font-size: 0.9rem;
-        margin-bottom: 0.3rem;
-    }
-    
-    .current-score {
-        font-size: 1.4rem;
+        width: min(95%, 18rem);
+        padding: clamp(0.4rem, 1vw, 0.5rem);
     }
     
     .btn {
-        font-size: 1rem;
-        padding: 0.3rem 0.8rem;
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        padding: clamp(0.25rem, 0.8vw, 0.3rem) clamp(0.6rem, 1.5vw, 0.8rem);
+        min-height: 36px;
     }
     
     .btn::first-letter {
-        font-size: 1.2rem;
+        font-size: 1em;
+        margin-right: 0.3rem;
     }
     
     .btn--new {
-        top: 0.3rem;
-        right: 0.3rem;
+        top: clamp(0.2rem, 1vw, 0.3rem);
+        right: clamp(0.2rem, 1vw, 0.3rem);
     }
     
     .btn--roll {
-        bottom: 4rem;
+        bottom: clamp(3.5rem, 8vh, 4rem);
     }
     
     .btn--hold {
-        bottom: 0.3rem;
+        bottom: clamp(0.2rem, 1vh, 0.3rem);
     }
     
     .dice {
-        height: 3.5rem;
+        height: clamp(3rem, 6vw, 3.5rem);
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .dice {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .player {
+        transition: none;
+    }
+    
+    .current {
+        transition: none;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-dark: #e0e0e0;
+        --glass-bg: rgba(20, 20, 20, 0.4);
+        --glass-active: rgba(30, 30, 30, 0.5);
+        --glass-button: rgba(40, 40, 40, 0.7);
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    main {
+        background: white !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+    }
+    
+    .btn {
+        display: none !important;
+    }
+    
+    .dice {
+        display: none !important;
     }
 }
