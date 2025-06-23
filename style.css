@@ -30,7 +30,7 @@ html {
 body {
     font-family: 'Nunito', sans-serif;
     font-weight: 400;
-    min-height: 100vh;
+    max-height: 100vh;
     color: var(--text-dark);
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     display: flex;
